@@ -1,112 +1,393 @@
+
 # Protected Areas and Income in Italian Inner Areas — Replication Package
 
-<p align="center">
-  <img src="cover.png" alt="Spatial distribution of the protected areas research framework" width="760">
-</p>
+**Published in:** *Environmental and Resource Economics* (Springer Nature), Volume 89, Article 76, 2026.
 
-Replication material associated with:
+**DOI:** https://doi.org/10.1007/s10640-026-01122-0
 
-**Do Protected Areas Affect the Income Levels in Remote Regions? Evidence from Italian Inner Areas**
+**Published article:** https://link.springer.com/article/10.1007/s10640-026-01122-0
 
-**Authors:** Gianluca Monturano, Carmela Ciccarelli, and Luigi Mastronardi  
-**Journal:** *Environmental and Resource Economics*, Volume 89, Article 76 (2026)  
-**Published article:** https://link.springer.com/article/10.1007/s10640-026-01122-0  
-**DOI:** https://doi.org/10.1007/s10640-026-01122-0  
+**Authors:** Gianluca Monturano, Carmela Ciccarelli, Luigi Mastronardi.
+
 **Repository:** https://github.com/gmonturano/enviromental_income_park
 
-## Overview
+---
 
-This repository documents the main two-way fixed-effects Difference-in-Differences (DiD) specifications accompanying the paper. The analysis studies how the share of municipal land under environmental protection relates to per-capita income in Italian inner municipalities, within the place-based policy context of the National Strategy for Inner Areas (SNAI).
+<p align="center">
+  <img src="cover.png"
+       alt="Protected areas and Italian inner municipalities"
+       width="700">
+</p>
 
-The public repository focuses on the principal estimations. It does not bundle every raw-source download, exploratory script, geographic-processing routine, event study, or heterogeneity analysis employed throughout the research project.
+## About this replication package
 
-## Empirical approach
+This repository accompanies the research article:
 
-The benchmark estimates use a continuous treatment: **the share of municipal surface designated as protected area**. The authors compare changes before and after the 2014 policy transition, controlling for municipal and year fixed effects. Five principal specifications are defined in the first worksheet of the supplied metadata workbook; successive models use different sets of socioeconomic and policy controls.
+**Do Protected Areas Affect the Income Levels in Remote Regions? Evidence from Italian Inner Areas.**
 
-The full article also discusses event-study evidence, territorial spillovers, heterogeneity, and distributional outcomes. Those analyses are not part of the main-script release here.
+As stated in the published article's Data Availability section, the **main R code used to produce the empirical estimates is made publicly available through this GitHub repository**.
 
-## Replication workflow
+Accordingly, this repository provides the public main-estimation component of the research, rather than the complete computational archive.
+
+The broader replication package, including the original data-preparation routines, supplementary specifications, spatial analyses, and robustness procedures, may be requested from the authors.
+
+**Researchers seeking the full replication package should contact the corresponding author directly by email**, subject to applicable data-sharing conditions.
+
+---
+
+## 1. Overview
+
+The study investigates the economic effects of protected natural areas on income in remote Italian municipalities.
+
+The analysis focuses on territories classified as inner areas under the Italian National Strategy for Inner Areas.
+
+The research examines whether the presence and intensity of protected areas are associated with changes in local economic performance.
+
+The empirical investigation uses municipal panel data covering **2007–2022**.
+
+The principal outcome is municipal per capita income.
+
+The main treatment measures the proportion of municipal land designated as protected.
+
+The econometric framework is based on a **continuous-treatment Difference-in-Differences approach**, incorporating municipal and year fixed effects.
+
+The study assesses whether the effects of protected areas differ across territories and types of protection.
+
+The published paper also reports additional spatial and robustness analyses.
+
+The public repository focuses on the principal metadata-driven DiD estimations.
+
+---
+
+## 2. Scope of public replication
+
+The publicly available repository contains:
+
+- The main R estimation script.
+- The metadata workbook defining the principal specifications.
+- The processed municipal estimation dataset.
+- Documentation of the estimation workflow.
+- A representative research figure.
+
+The full research archive may additionally include:
+
+- Original data-source acquisition and harmonization.
+- Construction of protected-area exposure measures.
+- Municipal geographic matching.
+- Alternative treatment definitions.
+- Territorial and spatial spillover models.
+- Additional heterogeneity analyses.
+- Robustness and sensitivity procedures.
+
+These materials may be requested from the corresponding author.
+
+Although the article identifies public statistical sources for the underlying data, the public estimation package does not necessarily include the complete workflow for reconstructing the processed municipal panel from the original sources.
+
+---
+
+## 3. Replication workflow
 
 ```mermaid
 flowchart TD
-    A[Processed municipality-year panel] --> B[Benchmark transformations]
-    M[First-sheet metadata: five specifications] --> C[Model formulas]
-    B --> D[Two-way fixed effects panel]
-    D --> E[Continuous-treatment DiD estimations]
-    C --> E
-    E --> F[Coefficient tables and model objects]
-    F --> G[Compare with the published article]
+    A["Municipal estimation panel"] --> B["db_TOT_aree_prot.RData"]
+    C["Main metadata workbook"] --> D["Five principal specifications"]
+
+    B --> E["Protected-area exposure"]
+    E --> F["Continuous-treatment DiD"]
+    D --> F
+
+    F --> G["Municipality and year fixed effects"]
+    G --> H["Per capita income estimates"]
+    H --> I["Main empirical results"]
 ```
 
-## Repository structure
+The workflow represents the main estimation stage.
+
+Additional analyses reported in the published article may require further original code and research materials.
+
+---
+
+## 4. Repository structure
 
 ```text
 enviromental_income_park/
-├── README.md
-├── cover.png
+│
 ├── code/
 │   ├── 01_main_did.R
 │   └── meta_DB_Turi_spec_2007_2020.xlsx
+│
 ├── db/
 │   └── db_TOT_aree_prot.RData
-└── results/
-    └── tables/
+│
+├── results/
+│   └── tables/
+│
+├── cover.png
+└── README.md
 ```
 
-## Data availability
+The repository contains the principal DiD estimation script and the metadata required to define the main specifications.
 
-All data employed in the study come from official statistical sources that are publicly available and can be freely downloaded. The dataset construction process can be replicated using the data sources described in the published article. Additional information about data preparation and direct source links can be obtained from the authors upon request.
+---
 
-The repository includes the author's processed RData input (`db/db_TOT_aree_prot.RData`) from the supplied archive, rather than every raw input file. **This file is the full supplied processed RData, not a 100-row sample.** Releasing this file should be confirmed against the authors' redistribution preferences before making the repository public.
+## 5. Data availability
 
-The RData file must contain the object `DB_finale`, required for the benchmark analysis. Published coefficients are authoritative only in the published article; different processed-data revisions can yield different outputs.
+The empirical analysis uses municipal panel information concerning:
 
-## Metadata
+- Per capita taxable income.
+- Protected-area coverage.
+- Municipal socioeconomic characteristics.
+- Territorial conditions.
+- Additional explanatory variables.
+- Municipality and year identifiers.
 
-The workbook `code/meta_DB_Turi_spec_2007_2020.xlsx` contains **only the first worksheet** (`Foglio1`), which specifies the five benchmark models (`Spec1`–`Spec5`). The metadata labels specify `dependent_var`, `independent_vars`, `interaction` and `control_vars`.
+The underlying research draws on official statistical sources described in the published article.
 
-The reported outcome is `Redditi_Procapite` and the key interaction is `Treat:X..Aree.protette`, following the original estimation script. The workflow uses the treatment coding stored in the processed panel rather than creating a replacement intervention variable.
+### 5.1 Processed municipal dataset
 
-## Main R script
+The repository includes:
 
-`code/01_main_did.R` implements the five metadata-driven specifications using `plm::plm()` with municipality and time fixed effects. It contains the original benchmark definitions adapted into a single readable file, with project-relative data paths, explicit dependency checks, and machine-readable output exports.
+```text
+db/db_TOT_aree_prot.RData
+```
 
-The public code does not include alternate subgroup regressions, exploratory graphs, placebo tests, or spatial estimation blocks.
+This file contains the processed research panel used by the public main-estimation code.
 
-## Software requirements
+It is loaded directly by the R script.
 
-R and the R packages `plm` and `readxl` are required. Install missing packages with:
+The dataset supports inspection of the principal model variables and execution of the metadata-defined DiD specifications, subject to the required software dependencies.
+
+### 5.2 Original data construction
+
+The full preparation of the research panel includes the integration of administrative income information, protected-area indicators, and municipal characteristics.
+
+The complete construction process may require:
+
+- Downloading data from the original sources.
+- Geographic harmonization.
+- Municipal identifier reconciliation.
+- Treatment-intensity construction.
+- Variable transformation.
+- Panel consistency checks.
+
+The full set of these procedures is not included in the minimal public estimation package.
+
+Additional information concerning data preparation and source access may be requested from the corresponding author.
+
+### 5.3 Full empirical replication
+
+The public processed dataset supports the principal estimation framework.
+
+Reproduction of every published figure, spatial analysis, and robustness result may require additional scripts and supporting materials.
+
+The published article remains the authoritative source for the reported numerical results.
+
+---
+
+## 6. Metadata and econometric specifications
+
+The main specification workbook is:
+
+```text
+code/meta_DB_Turi_spec_2007_2020.xlsx
+```
+
+The repository contains the relevant first worksheet of the original metadata workbook.
+
+The worksheet defines **five main econometric specifications**.
+
+The principal variables include:
+
+```text
+Redditi_Procapite
+Treat:X..Aree.protette
+```
+
+The first variable represents the income outcome in the processed data.
+
+The second identifies the treatment term associated with protected-area exposure.
+
+The exact model formulas and variable transformations are defined by the metadata and the estimation script.
+
+The general empirical specification can be represented as:
+
+```text
+Income_it =
+    beta × (Post_t × ProtectedAreaShare_i)
+    + Controls_it
+    + Municipality fixed effects
+    + Year fixed effects
+    + Error_it
+```
+
+The treatment intensity corresponds to the share of municipal land classified as protected.
+
+The published empirical design uses a post-treatment period beginning in **2014**.
+
+This structure allows the analysis to exploit variation in the intensity of protected-area exposure rather than only a binary treated-versus-untreated distinction.
+
+---
+
+## 7. Main R script
+
+### `code/01_main_did.R`
+
+Implements the principal metadata-driven Difference-in-Differences estimations.
+
+The script:
+
+1. Loads the processed municipal panel.
+2. Reads the main metadata workbook.
+3. Identifies the treatment and outcome variables.
+4. Constructs the required fixed-effects specifications.
+5. Estimates the five main DiD models.
+6. Produces regression outputs for the selected specifications.
+
+The public script concentrates on the principal municipal panel estimations.
+
+The broader published study contains additional territorial, spatial, and robustness analyses that may not be implemented in the minimal public code.
+
+---
+
+## 8. Software requirements
+
+The empirical analysis was developed in **R**.
+
+The main public script requires:
+
+- `plm` for panel-data estimation.
+- `readxl` for reading Excel metadata.
+
+Additional packages may be required for optional statistical reporting or supplementary analyses.
+
+Install the dependencies before running the main code.
+
+RStudio is recommended but not required.
+
+---
+
+## 9. How to run
+
+Clone the repository:
+
+```bash
+git clone https://github.com/gmonturano/enviromental_income_park.git
+```
+
+Open the repository root in R or RStudio.
+
+Install the required packages if necessary:
 
 ```r
 install.packages(c("plm", "readxl"))
 ```
 
-## How to run
-
-Open R or RStudio in the repository root and execute:
+Run the main estimation script:
 
 ```r
 source("code/01_main_did.R")
 ```
 
-The script loads `DB_finale`, applies the benchmark transformations, reads the first metadata sheet, estimates the five specifications and writes results to `results/tables/`.
+The script expects:
 
-### Outputs
+```text
+db/db_TOT_aree_prot.RData
+code/meta_DB_Turi_spec_2007_2020.xlsx
+```
 
-- `results/tables/main_coefficients.csv` — numerical coefficient table for the estimated specifications.
-- `results/tables/main_models.rds` — serialized fitted model objects for subsequent analysis.
+The public code uses the metadata-defined main specifications.
 
-Generated outputs are not supplied as published tables. Please consult the article for official estimates, inference, and interpretation.
+Successful execution requires the expected panel structure, variable names, and installed dependencies.
 
-## Scope and verification
+---
 
-This package is based on the authors' supplied code, metadata, and processed RData file. The original script was consolidated to retain only the benchmark specifications. The model implementation **has not been executed or numerically validated in R in this environment**. The supplied file may require minor adjustments if its panel object or variable transformations differ from the archived working version.
+## 10. Replication outputs
 
-## Additional code availability
+The main estimation script is designed to produce:
 
-The full set of coding files—including database construction, event-study analyses, territorial heterogeneity, spatial spillover models, alternative specifications and supplementary checks—is available from the authors upon reasonable request.
+- DiD coefficient estimates.
+- Fixed-effects regression summaries.
+- Standard errors.
+- Statistical significance measures.
+- Main-model statistical outputs.
 
-## Citation
+The public directory:
 
-Monturano, G., Ciccarelli, C., & Mastronardi, L. (2026). **Do Protected Areas Affect the Income Levels in Remote Regions? Evidence from Italian Inner Areas.** *Environmental and Resource Economics*, **89**, Article 76. https://doi.org/10.1007/s10640-026-01122-0
+```text
+results/tables/
+```
+
+provides a location for organizing generated estimation tables.
+
+The complete set of published robustness results, spatial exercises, and supplementary figures may require additional computational materials.
+
+The published article remains the official reference for the reported results.
+
+---
+
+## 11. Full replication package — available upon request
+
+**The main R estimation code is publicly available through this repository, consistent with the Data Availability statement of the published article.**
+
+However, this repository does not include the entire computational archive underlying the research.
+
+The broader replication package may include:
+
+- Complete data-construction scripts.
+- Original data-source documentation.
+- Additional treatment specifications.
+- Spatial spillover analyses.
+- Territorial heterogeneity estimations.
+- Robustness and sensitivity checks.
+- Supplementary tables and figures.
+
+**Researchers requiring the full replication package should contact the corresponding author directly by email.**
+
+Requests should identify the article by title or DOI and include a brief description of the intended replication purpose.
+
+Sharing of particular datasets or third-party materials remains subject to their applicable licensing, privacy, and redistribution conditions.
+
+---
+
+## 12. Citation
+
+If you use the public code, metadata, or supporting data, please cite:
+
+Monturano, G., Ciccarelli, C., & Mastronardi, L. (2026).
+
+**Do Protected Areas Affect the Income Levels in Remote Regions? Evidence from Italian Inner Areas.**
+
+*Environmental and Resource Economics, 89*, Article 76.
+
+https://doi.org/10.1007/s10640-026-01122-0
+
+### BibTeX
+
+```bibtex
+@article{monturano2026protected,
+  title   = {Do Protected Areas Affect the Income Levels
+             in Remote Regions?
+             Evidence from Italian Inner Areas},
+  author  = {Monturano, Gianluca and
+             Ciccarelli, Carmela and
+             Mastronardi, Luigi},
+  journal = {Environmental and Resource Economics},
+  volume  = {89},
+  pages   = {76},
+  year    = {2026},
+  doi     = {10.1007/s10640-026-01122-0},
+  url     = {https://doi.org/10.1007/s10640-026-01122-0}
+}
+```
+
+---
+
+## 13. Contact and research inquiries
+
+For questions about the estimation code, metadata, or full replication materials, please contact the corresponding author directly by email.
+
+**Repository scope:** Public main-estimation DiD code and processed municipal panel.
+
+**Full replication package:** Available upon direct email request, subject to applicable data-sharing restrictions.
+
+**Official publication:** https://doi.org/10.1007/s10640-026-01122-0
